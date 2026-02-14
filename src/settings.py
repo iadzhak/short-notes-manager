@@ -1,0 +1,10 @@
+from pathlib import Path
+
+BASE_DIR = Path(__file__).parent
+
+DATA_DIR_NAME = 'data'
+CATEGORY_FILENAME = 'category.csv'
+
+DATA_DIR = BASE_DIR / DATA_DIR_NAME
+
+CATEGORY_STORAGE_FILEPATH = DATA_DIR / CATEGORY_FILENAME
