@@ -32,5 +32,14 @@ def custom_filepath():
     path = CSV_DIR / 'custom.csv'
     path.parent.mkdir(parents=True, exist_ok=True)
     yield path
-    # if path.exists():
-    #     path.unlink()
+    if path.exists():
+        path.unlink()
+
+
+@pytest.fixture
+def category_filepath():
+    path = CSV_DIR / 'categories.csv'
+    path.parent.mkdir(parents=True, exist_ok=True)
+    yield path
+    if path.exists():
+        path.unlink()
