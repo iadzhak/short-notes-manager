@@ -6,8 +6,8 @@ class HasId:
 
 
 class Base(HasId):
-    def __init__(self, id: UUID) -> None:
-        self._id = id
+    def __init__(self, id: UUID | str) -> None:
+        self._id = id if isinstance(id, UUID) else UUID(id)
 
     @property
     def id(self) -> UUID:
