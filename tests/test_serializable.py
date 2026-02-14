@@ -1,18 +1,6 @@
 from uuid import uuid4
 
-import pytest
-
-from src.mixins.serializable import Serializable
 from src.models.category import Category
-
-
-class Custom(Serializable):
-    serializable_fields = ('name', 'age')
-
-    def __init__(self, name, age, note=None):
-        self.name = name
-        self.age = age
-        self.note = note
 
 
 class TestSerializable:
@@ -25,12 +13,12 @@ class TestSerializable:
         'age': age,
     }
 
-    def test_to_dict(self):
-        new = Custom(self.name, self.age, self.note)
+    def test_to_dict(self, custom_class):
+        new = custom_class(self.name, self.age, self.note)
         assert new.to_dict() == self.serialized
 
-    def test_from_dict(self):
-        new = Custom.from_dict(self.serialized)
+    def test_from_dict(self, custom_class):
+        new = custom_class.from_dict(self.serialized)
         assert new.name == self.name
         assert new.age == self.age
         assert new.note is None
