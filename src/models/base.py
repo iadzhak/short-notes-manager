@@ -12,3 +12,6 @@ class Base(HasId):
     @property
     def id(self) -> UUID:
         return self._id
+
+    def serialize_id(self) -> str:
+        return str(self.id)
