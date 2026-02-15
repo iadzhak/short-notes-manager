@@ -208,3 +208,6 @@ __marimo__/
 
 # Test data
 tests/csv_data
+
+# User data
+src/data
