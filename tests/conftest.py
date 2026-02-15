@@ -43,3 +43,12 @@ def category_filepath():
     yield path
     if path.exists():
         path.unlink()
+
+
+@pytest.fixture
+def note_filepath():
+    path = CSV_DIR / 'note.csv'
+    path.parent.mkdir(parents=True, exist_ok=True)
+    yield path
+    if path.exists():
+        path.unlink()
