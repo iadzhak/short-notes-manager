@@ -30,6 +30,21 @@ class Note(Serializable, Entity):
             created_at=datetime.now(),
         )
 
+    @classmethod
+    def deserialize_created_at(cls, value: str) -> datetime:
+        return datetime.fromisoformat(value)
+
+    def serialize_category(self) -> str:
+        return str(self.category.id)
+
+    def serialize_created_at(self) -> str:
+        return str(self.created_at)
+
+    @classmethod
+    def deserialize_category(cls, value: str) -> Category:
+        from ..storage.category_storage import category_storage
+        return category_storage.data[UUID(value)]
+
     def __str__(self) -> str:
         return (
             f'{self.__class__.__name__}(id={self.id}, title={self.title!r},'
