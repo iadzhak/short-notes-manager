@@ -1,5 +1,6 @@
 from pathlib import Path
 
+from ..settings import CATEGORY_STORAGE_FILEPATH
 from .csv_storage import CSVStorage
 from ..models.category import Category
 
@@ -22,3 +23,7 @@ class CategoryStorage(CSVStorage):
             if category.title == title:
                 return category
         return None
+
+
+category_storage = CategoryStorage(CATEGORY_STORAGE_FILEPATH)
+category_storage.load()
