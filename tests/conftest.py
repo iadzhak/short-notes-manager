@@ -38,7 +38,7 @@ def custom_filepath():
 
 @pytest.fixture
 def category_filepath():
-    path = CSV_DIR / 'categories.csv'
+    path = CSV_DIR / 'category.csv'
     path.parent.mkdir(parents=True, exist_ok=True)
     yield path
     if path.exists():
