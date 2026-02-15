@@ -6,8 +6,8 @@ from ..models.category import Category
 from ..settings import NOTE_STORAGE_FILEPATH
 
 
-class NoteStorage(CSVStorage):
-    def __init__(self, filepath: Path, model_class=Note):
+class NoteStorage[T: Note](CSVStorage[T]):
+    def __init__(self, filepath: Path, model_class: type[T] = Note):
         super().__init__(filepath=filepath, model_class=model_class)
 
     def create(self, title: str, text: str, category: Category) -> Note:

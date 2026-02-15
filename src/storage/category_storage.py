@@ -5,8 +5,8 @@ from .csv_storage import CSVStorage
 from ..models.category import Category
 
 
-class CategoryStorage(CSVStorage):
-    def __init__(self, filepath: Path, model_class=Category) -> None:
+class CategoryStorage[T: Category](CSVStorage[T]):
+    def __init__(self, filepath: Path, model_class: type[T] = Category) -> None:
         super().__init__(filepath=filepath, model_class=model_class)
 
     def create(self, title: str) -> Category:
