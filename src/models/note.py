@@ -2,13 +2,18 @@ from typing import Self
 from uuid import UUID, uuid4
 from datetime import datetime
 
+from .category import Category
 from .entity import Entity
+from ..mixins.serializable import Serializable
 
 
-class Note(Entity):
-    def __init__(self, id: UUID, title: str, text: str, created_at: datetime) -> None:
-        super().__init__(id=id, title=title)
+class Note(Serializable, Entity):
+    serializable_fields = ('id', 'title', 'text', 'category', 'created_at')
+
+    def __init__(self, id: UUID, title: str, text: str, category: Category, created_at: datetime) -> None:
+        Entity.__init__(self, id=id, title=title)
         self.text = text
+        self.category = category
         self._created_at = created_at
 
     @property
@@ -16,18 +21,19 @@ class Note(Entity):
         return self._created_at
 
     @classmethod
-    def create(cls, title: str, text: str) -> Self:
+    def create(cls, title: str, text: str, category: Category) -> Self:
         return cls(
             id=uuid4(),
             title=title,
             text=text,
+            category=category,
             created_at=datetime.now(),
         )
 
     def __str__(self) -> str:
         return (
             f'{self.__class__.__name__}(id={self.id}, title={self.title!r},'
-            f' text={self.text!r}, created_at={self.created_at!r})'
+            f' text={self.text!r}, category={self.category!r}, created_at={self.created_at!r})'
         )
 
     def __repr__(self) -> str:
