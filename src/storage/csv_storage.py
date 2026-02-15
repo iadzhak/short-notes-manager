@@ -24,6 +24,10 @@ class CSVStorage[T: Serializable | HasId](StorageProtocol):
                 return item
         return None
 
+    def clear(self) -> None:
+        self.data.clear()
+        self.save()
+
     def save(self) -> None:
         self.filepath.parent.mkdir(parents=True, exist_ok=True)
         with self.filepath.open('w') as f:

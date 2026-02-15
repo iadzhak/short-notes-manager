@@ -35,3 +35,17 @@ class TestCSVStorage:
         assert item.id == self.id
         assert item.name == self.name
         assert item.age == self.age
+
+    def test_clear(self, custom_class, custom_filepath):
+        storage = CSVStorage(filepath=custom_filepath, model_class=custom_class)
+        new = custom_class(name=self.name, age=self.age)
+        new.id = self.id
+        storage.data[new.id] = new
+        storage.save()
+        storage.data.clear()
+        storage.load()
+        assert len(storage.all()) == 1
+        storage.clear()
+        assert len(storage.all()) == 0
+        storage.load()
+        assert len(storage.all()) == 0
