@@ -18,6 +18,12 @@ class CSVStorage[T: Serializable | HasId](StorageProtocol):
     def all(self) -> list[T]:
         return list(self.data.values())
 
+    def get_by_title(self, title: str) -> T | None:
+        for item in self.all():
+            if getattr(item, 'title', None) == title:
+                return item
+        return None
+
     def save(self) -> None:
         self.filepath.parent.mkdir(parents=True, exist_ok=True)
         with self.filepath.open('w') as f:

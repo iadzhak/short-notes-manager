@@ -15,12 +15,6 @@ class CategoryStorage(CSVStorage):
         self.save()
         return category
 
-    def get_by_title(self, title: str) -> Category | None:
-        for category in self.all():
-            if category.title == title:
-                return category
-        return None
-
 
 category_storage = CategoryStorage(CATEGORY_STORAGE_FILEPATH)
 category_storage.load()
