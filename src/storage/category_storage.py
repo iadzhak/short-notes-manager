@@ -9,9 +9,6 @@ class CategoryStorage(CSVStorage):
     def __init__(self, filepath: Path, model_class=Category) -> None:
         super().__init__(filepath=filepath, model_class=model_class)
 
-    def all(self) -> list[Category]:
-        return list(self.data.values())
-
     def create(self, title: str) -> Category:
         category = Category.create(title=title)
         self.data[category.id] = category
