@@ -2,6 +2,7 @@ from src.storage import category_storage, note_storage
 
 
 def create_sample_data():
+    """Создает тестовые данные."""
     work = category_storage.create('Работа')
     personal = category_storage.create('Личное')
 
@@ -27,11 +28,13 @@ def create_sample_data():
 
 
 def clear_all_data():
+    """Удаляет все данные."""
     note_storage.clear()
     category_storage.clear()
 
 
 def main():
+    """Показывает все заметки по категориям."""
     if not note_storage.all():
         print('Пока пусто...')
     for category in category_storage.all():
